@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <TextView
+        android:id="@+id/product_type_row"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/product_type_hint"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_row_mid"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/quantity_row"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/quantity_hint"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_row_mid"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/price_row"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/price_hint"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_row_mid"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/product_type_row" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_row_mid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

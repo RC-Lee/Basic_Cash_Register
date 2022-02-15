@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Assignment_2</string>
+    <string name="product_type_hint">Product Type</string>
+    <string name="total_hint">Total</string>
+    <string name="quantity_hint">Quantity</string>
+    <string name="buy_txt">buy</string>
+    <string name="price_hint">price</string>
 </resources>

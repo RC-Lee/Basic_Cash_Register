@@ -7,12 +7,99 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/productType_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:hint="@string/product_type_hint"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_tophalf"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vmid"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <NumberPicker
+        android:id="@+id/quantity_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_mid"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vmid"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline_tophalf" />
+
+    <TextView
+        android:id="@+id/total_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/total_hint"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_mid"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.69"
+        app:layout_constraintStart_toStartOf="@+id/guideline_vmid"
+        app:layout_constraintTop_toTopOf="@+id/guideline_tophalf" />
+
+    <TextView
+        android:id="@+id/quantity_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/quantity_hint"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_vmid"
+        app:layout_constraintHorizontal_bias="0.16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline_mid" />
+
+    <Button
+        android:id="@+id/buy_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="@string/buy_txt"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_bottom"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toStartOf="@+id/guideline_vmid"
+        app:layout_constraintTop_toTopOf="@+id/guideline_mid" />
+
+    <ListView
+        android:id="@+id/product_list_lv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline_bottom" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_tophalf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.11080711" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_mid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.55" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_vmid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.6" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
