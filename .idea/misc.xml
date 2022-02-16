@@ -3,7 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Android/Projects/Assignment_2/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Android/Projects/Assignment_2/app/src/main/res/layout/activity_detail.xml" value="0.17552083333333332" />
+        <entry key="..\:/Android/Projects/Assignment_2/app/src/main/res/layout/activity_history.xml" value="0.20652173913043478" />
+        <entry key="..\:/Android/Projects/Assignment_2/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Android/Projects/Assignment_2/app/src/main/res/layout/activity_manager.xml" value="0.20652173913043478" />
+        <entry key="..\:/Android/Projects/Assignment_2/app/src/main/res/layout/activity_purchase_detail.xml" value="0.20652173913043478" />
+        <entry key="..\:/Android/Projects/Assignment_2/app/src/main/res/layout/activity_restock.xml" value="0.2" />
+        <entry key="..\:/Android/Projects/Assignment_2/app/src/main/res/layout/history_row_layout.xml" value="0.20652173913043478" />
         <entry key="..\:/Android/Projects/Assignment_2/app/src/main/res/layout/product_row_layout.xml" value="0.176" />
       </map>
     </option>

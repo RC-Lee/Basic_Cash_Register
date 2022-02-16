@@ -16,7 +16,7 @@ public class ProductManager {
     }
 
     public void updateQuantity(int position, int quantity){
-        ((Product)allProducts.get(position)).quantity = quantity;
+        ((Product)allProducts.get(position)).quantity += quantity;
     }
 
 

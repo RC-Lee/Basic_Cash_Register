@@ -3,6 +3,7 @@ package com.example.assignment_2;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     // Layouts
@@ -24,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     // Apps
     Product currentProduct;
     ProductManager productManager;
+    ProductBaseAdapter productAdapter;
+    PurchaseManager purchaseManager;
     int productPosition;
     // alert dialog
     AlertDialog.Builder builder;
@@ -47,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         // Get App values
         currentProduct = ((MainApp)getApplication()).mainProduct;
         productManager = ((MainApp)getApplication()).productManager;
+        purchaseManager = ((MainApp)getApplication()).purchaseManager;
         // Set initial list for products
         if(productManager.allProducts.isEmpty()){
             productManager.initialize();
@@ -70,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
         //List View
         ArrayList<Product> list = productManager.allProducts;
-        ProductBaseAdapter productAdapter = new ProductBaseAdapter(list, this);
+        productAdapter = new ProductBaseAdapter(list, this);
         productList.setAdapter(productAdapter);
         productList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -83,44 +88,48 @@ public class MainActivity extends AppCompatActivity {
                 total_tv.setText(currentProduct.getTotal());
             }
         });
+    }
 
-        //Button
-        buyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(currentProduct.quantity == 0 || currentProduct.name.equals("")){
-                    Toast.makeText(MainActivity.this, "All fields required!", Toast.LENGTH_LONG).show();
-                    Log.d("oncreate", currentProduct.name);
-                }
-                else{
-                    Product productInList = (Product) productManager.allProducts.get(productPosition);
-                    if(currentProduct.quantity > productInList.quantity){
-                        Toast.makeText(MainActivity.this, "Not enough quantity!", Toast.LENGTH_LONG).show();
-                    }
-                    else{
-                        builder.setTitle("Thank you for your purchase!");
-                        builder.setMessage(currentProduct.getPurchase());
-                        builder.setCancelable(true);
-                        builder.setNegativeButton("OK", null);
-                        builder.show();
+    public void makePurchase(View view){
+        if(currentProduct.quantity == 0 || currentProduct.name.equals("")){
+            Toast.makeText(MainActivity.this, "All fields required!", Toast.LENGTH_LONG).show();
+        }
+        else{
+            Product productInList = (Product) productManager.allProducts.get(productPosition);
+            if(currentProduct.quantity > productInList.quantity){
+                Toast.makeText(MainActivity.this, "Not enough quantity!", Toast.LENGTH_LONG).show();
+            }
+            else{
+                builder.setTitle("Thank you for your purchase!");
+                builder.setMessage(currentProduct.getPurchase());
+                builder.setCancelable(true);
+                builder.setNegativeButton("OK", null);
+                builder.show();
 
-                        productManager.updateQuantity(productPosition, productInList.quantity - currentProduct.quantity);
-                        ((MainApp)getApplication()).mainProduct = new Product();
-                        currentProduct = ((MainApp)getApplication()).mainProduct;
-                        quantity_tv.setText(String.valueOf(currentProduct.quantity));
-                        productType_tv.setText(currentProduct.name);
-                        total_tv.setText(currentProduct.getTotal());
-                        quantityPicker.setValue(currentProduct.quantity);
+                Date date = new Date();
+                Purchase purchase = new Purchase(currentProduct.name, currentProduct.quantity, currentProduct.getTotal(), date.toString());
+                purchaseManager.addNewPurchase(purchase);
 
-                        productList.setAdapter(new ProductBaseAdapter(productManager.allProducts, MainActivity.this));
+                // Update quantity
+                productManager.updateQuantity(productPosition, -currentProduct.quantity);
 
-                    }
-                }
+                // Reset current product purchase and values
+                ((MainApp)getApplication()).mainProduct = new Product();
+                currentProduct = ((MainApp)getApplication()).mainProduct;
+                quantity_tv.setText(String.valueOf(currentProduct.quantity));
+                productType_tv.setText(currentProduct.name);
+                total_tv.setText(currentProduct.getTotal());
+                quantityPicker.setValue(currentProduct.quantity);
 
+                productAdapter.notifyDataSetChanged();
 
             }
-        });
+        }
+    }
 
+    public void manage(View view){
+        Intent managerIntent = new Intent(this, Activity_Manager.class);
+        startActivity(managerIntent);
     }
 
 }

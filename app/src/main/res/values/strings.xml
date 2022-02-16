@@ -5,4 +5,11 @@
     <string name="quantity_hint">Quantity</string>
     <string name="buy_txt">buy</string>
     <string name="price_hint">price</string>
+    <string name="manager_txt">Manager</string>
+    <string name="history_txt">History</string>
+    <string name="restock_txt">Restock</string>
+    <string name="date_hint">Date</string>
+    <string name="enter_new_quantity_txt">Enter New Quantity</string>
+    <string name="cancel_txt">Cancel</string>
+    <string name="ok_txt">ok</string>
 </resources>
