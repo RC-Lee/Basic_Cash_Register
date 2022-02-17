@@ -64,7 +64,6 @@ public class PurchaseRecyclerAdapter extends RecyclerView.Adapter<PurchaseRecycl
             productText = itemView.findViewById(R.id.purchase_item_name);
             quantityText = itemView.findViewById(R.id.purchase_quantity);
             totalText = itemView.findViewById(R.id.purchase_total);
-
         }
     }
 }
