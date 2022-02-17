@@ -8,24 +8,25 @@ import java.util.Locale;
 public class Purchase implements Parcelable {
     String productType;
     int quantity;
-    String price;
+    String total;
     String purchaseDate;
 
-    public Purchase(String productType, int quantity, String price, String purchaseDate) {
+    public Purchase(String productType , int quantity, String total, String purchaseDate) {
         this.productType = productType;
         this.quantity = quantity;
-        this.price = price;
+        this.total = total;
         this.purchaseDate = purchaseDate;
     }
 
     public String getDetails(){
-        return String.format(Locale.ENGLISH,"Product: %s%nQuantity: %d%nTotal: %s%nDate: %s", productType, quantity, price, purchaseDate );
+        return String.format(Locale.ENGLISH,"Product: %s%nQuantity: %d%nTotal: %s%nDate: %s",
+                productType, quantity, total, purchaseDate );
     }
 
     protected Purchase(Parcel in) {
         productType = in.readString();
         quantity = in.readInt();
-        price = in.readString();
+        total = in.readString();
         purchaseDate = in.readString();
     }
 
@@ -50,7 +51,7 @@ public class Purchase implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(productType);
         parcel.writeInt(quantity);
-        parcel.writeString(price);
+        parcel.writeString(total);
         parcel.writeString(purchaseDate);
     }
 }

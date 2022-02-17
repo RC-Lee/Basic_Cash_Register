@@ -30,6 +30,10 @@ public class Product implements Parcelable {
         return "You have purchased " + quantity + " " + name + " for $" +getTotal();
     }
 
+    public void updateQuantity(int quantity){
+        this.quantity += quantity;
+    }
+
     protected Product(Parcel in) {
         name = in.readString();
         quantity = in.readInt();

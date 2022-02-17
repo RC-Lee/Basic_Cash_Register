@@ -32,22 +32,20 @@ public class PurchaseRecyclerAdapter extends RecyclerView.Adapter<PurchaseRecycl
     public void onBindViewHolder(@NonNull PurchaseViewHolder holder, int position) {
         String productName = purchaseList.get(position).productType;
         String quantity = String.valueOf(purchaseList.get(position).quantity);
-        String total = purchaseList.get(position).price;
+        String total = purchaseList.get(position).total;
 
+        // The selected purchase may be sent to the history details activity
         Purchase selected = purchaseList.get(position);
 
         holder.productText.setText(productName);
         holder.quantityText.setText(quantity);
-        holder.priceText.setText(total);
+        holder.totalText.setText(total);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Context viewContext = view.getContext();
-                Intent intent = new Intent(viewContext, Activity_Detail.class);
-                intent.putExtra("selected", selected);
-                viewContext.startActivity(intent);
-            }
+        holder.itemView.setOnClickListener(view -> {
+            Context viewContext = view.getContext();
+            Intent intent = new Intent(viewContext, Activity_Detail.class);
+            intent.putExtra("selected", selected);
+            viewContext.startActivity(intent);
         });
     }
 
@@ -59,22 +57,14 @@ public class PurchaseRecyclerAdapter extends RecyclerView.Adapter<PurchaseRecycl
     public static class PurchaseViewHolder extends RecyclerView.ViewHolder{
         TextView productText;
         TextView quantityText;
-        TextView priceText;
+        TextView totalText;
 
         public PurchaseViewHolder(@NonNull View itemView) {
             super(itemView);
             productText = itemView.findViewById(R.id.purchase_item_name);
             quantityText = itemView.findViewById(R.id.purchase_quantity);
-            priceText = itemView.findViewById(R.id.purchase_total);
+            totalText = itemView.findViewById(R.id.purchase_total);
 
-            // itemView.setOnClickListener(new View.OnClickListener() {
-            //    @Override
-            //    public void onClick(View view) {
-            //        Context viewContext = view.getContext();
-            //        Intent intent = new Intent(viewContext, Activity_Purchase_Detail.class);
-            //        viewContext.startActivity(intent);
-            //    }
-            //});
         }
     }
 }

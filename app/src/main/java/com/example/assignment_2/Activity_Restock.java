@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -21,9 +20,9 @@ public class Activity_Restock extends AppCompatActivity implements View.OnClickL
     Button cancelBtn;
     ListView restockList;
 
+    Product currentProduct;
     ProductManager manager;
     ProductBaseAdapter adapter;
-    int position = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,18 +35,18 @@ public class Activity_Restock extends AppCompatActivity implements View.OnClickL
         cancelBtn = findViewById(R.id.cancel_btn);
         restockList = findViewById(R.id.restock_product_list);
 
+        currentProduct = ((MainApp)getApplication()).restockProduct;
+        productText.setText(currentProduct.name);
+
         manager = ((MainApp)getApplication()).productManager;
         ArrayList<Product> list = manager.allProducts;
         adapter = new ProductBaseAdapter(list, this);
         restockList.setAdapter(adapter);
 
-        restockList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Product selectedProduct = (Product) adapterView.getItemAtPosition(i);
-                productText.setText(selectedProduct.name);
-                position = i;
-            }
+        restockList.setOnItemClickListener((adapterView, view, i, l) -> {
+            ((MainApp)getApplication()).restockProduct = (Product) adapterView.getItemAtPosition(i);
+            currentProduct = ((MainApp)getApplication()).restockProduct;
+            productText.setText(currentProduct.name);
         });
 
         cancelBtn.setOnClickListener(this);
@@ -58,6 +57,7 @@ public class Activity_Restock extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
         int id = view.getId();
         if(id == R.id.cancel_btn){
+            ((MainApp)getApplication()).restockProduct = new Product();
             Intent managerIntent = new Intent(this, Activity_Manager.class);
             startActivity(managerIntent);
         }
@@ -66,10 +66,13 @@ public class Activity_Restock extends AppCompatActivity implements View.OnClickL
                 Toast.makeText(this, "All fields are required!", Toast.LENGTH_LONG).show();
             }
             else{
-                manager.updateQuantity(position, Integer.parseInt(newQuantity.getText().toString()));
+                int quantity = Integer.parseInt(newQuantity.getText().toString());
+                ((MainApp)getApplication()).restockProduct.updateQuantity(quantity);
                 adapter.notifyDataSetChanged();
 
-                productText.setText("");
+                ((MainApp)getApplication()).restockProduct = new Product();
+                currentProduct = ((MainApp)getApplication()).restockProduct;
+                productText.setText(currentProduct.name);
                 newQuantity.setText("");
             }
         }
